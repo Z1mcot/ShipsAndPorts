@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPort xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Port>
+    <Name>Порт 1</Name>
+    <Coordinates>
+      <X>0</X>
+      <Y>0</Y>
+    </Coordinates>
+  </Port>
+  <Port>
+    <Name>Порт 2</Name>
+    <Coordinates>
+      <X>100</X>
+      <Y>100</Y>
+    </Coordinates>
+  </Port>
+</ArrayOfPort>

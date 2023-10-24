@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfShip xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Ship>
+    <Name>Аврора</Name>
+    <Type>Passenger</Type>
+    <PortId>Порт 1</PortId>
+    <Range>1000</Range>
+    <Speed>10</Speed>
+  </Ship>
+  <Ship>
+    <Name>Андромеда</Name>
+    <Type>Course</Type>
+    <PortId>Порт 2</PortId>
+    <Range>100</Range>
+    <Speed>10</Speed>
+  </Ship>
+</ArrayOfShip>

@@ -36,6 +36,12 @@ namespace ShipsAndPorts.Models
 
         public string PortId => _portId;
 
+        public static Ship FromTxtFile(string[] data)
+        {
+            var type = (ShipTypeEnum)Enum.Parse(typeof(ShipTypeEnum), data[1]);
+            return new Ship(data[0], type, data[2], double.Parse(data[3]), double.Parse(data[4]));
+        }
+
         public Ship(string name, ShipTypeEnum type, string portId, double range, double speed)
         {
             _name = name;
@@ -43,15 +49,6 @@ namespace ShipsAndPorts.Models
             _portId = portId;
             _range = range;
             _speed = speed;
-        }
-
-        public Ship()
-        {
-            _name = "f";
-            _type = ShipTypeEnum.Passenger;
-            _portId = "a";
-            _range = 100;
-            _speed = 10;
         }
     }
 }

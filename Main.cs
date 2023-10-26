@@ -25,8 +25,8 @@ namespace ShipsAndPorts
 
         private void button_Login_Click(object sender, EventArgs e)
         {
-            var ships = DataLoader.LoadData<Ship>(Paths.ShipsFile);
-            var ports = DataLoader.LoadData<Port>(Paths.PortsFile);
+            var ships = DataLoader.LoadData<Ship>();
+            var ports = DataLoader.LoadData<Port>();
 
             var model = new ShipNavigatorModel(ships, ports);
             var controller = new ShipNavigatorController(model);

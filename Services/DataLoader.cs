@@ -1,52 +1,45 @@
 ﻿using ShipsAndPorts.Domain.Constants;
-using ShipsAndPorts.Domain.Enums;
 using ShipsAndPorts.Domain.Models;
 using ShipsAndPorts.Models;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace ShipsAndPorts.Services
 {
     public static class DataLoader
     {
-        // Все пути есть в классе Domain.Consts.Paths
-        public static List<T> LoadData<T>(string path)
+        private readonly static Dictionary<string, Func<string[], object>> _factories = new Dictionary<string, Func<string[], object>>
         {
-            List<T> data = new List<T>();
-            if (path == Convert.ToString(Paths.ShipsFile))
+            { Paths.PortsFile, Port.FromTxtFile },
+            { Paths.ShipsFile, Ship.FromTxtFile },
+        };
+
+        private readonly static Dictionary<Type, string> _paths = new Dictionary<Type, string>
+        {
+            { typeof(Port), Paths.PortsFile },
+            { typeof(Ship), Paths.ShipsFile },
+        };
+
+        // Все пути есть в классе Domain.Consts.Paths
+        public static List<T> LoadData<T>()
+        {
+            List<T> result = new List<T>();
+            var path = _paths[typeof(T)];
+            var factory = _factories[path];
+
+            using (var sr = new StreamReader(path))
             {
-                using (var sr = new StreamReader(path))
+                while (sr.EndOfStream)
                 {
-                    List<Ship> dataShip = new List<Ship>();
-                    string[] l = sr.ReadToEnd().Split(' ').ToArray();
-                    var shipType = (ShipTypeEnum)Enum.Parse(typeof(ShipTypeEnum), l[1]);
-                    Ship ship = new Ship(l[0], shipType, l[2], Convert.ToDouble(l[3]), Convert.ToDouble(l[4]));
-                    dataShip.Add(ship);
-                    data = dataShip.Cast<T>().ToList();
-                }
-            }
-            else
-            {
-                using (var sr = new StreamReader(path))
-                {
-                    List<Port> dataPort = new List<Port>();
-                    string[] l = sr.ReadToEnd().Split(' ').ToArray();
-                    Port port = new Port(l[0], new Point(Convert.ToInt32(l[1]), Convert.ToInt32(l[2])));
-                    dataPort.Add(port);
-                    data = dataPort.Cast<T>().ToList();
+                    string[] rawData = sr.ReadLine().Split(' ').ToArray();
+                    T newObj = (T)factory.Invoke(rawData);
+                    result.Add(newObj);
                 }
             }
 
-            return data;
-            //throw new NotImplementedException();
+            return result;
         }
     }
 }

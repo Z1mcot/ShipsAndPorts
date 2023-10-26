@@ -11,7 +11,7 @@ namespace ShipsAndPorts.Domain.Constants
     {
         private const string _ioDirectory = "../../IO";
 
-        public static string ShipsFile = _ioDirectory + "/ships.xml";
-        public static string PortsFile = _ioDirectory + "/ports.xml";
+        public static string ShipsFile = _ioDirectory + "/ships.txt";
+        public static string PortsFile = _ioDirectory + "/ports.txt";
     }
 }

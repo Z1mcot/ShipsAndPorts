@@ -32,7 +32,7 @@ namespace ShipsAndPorts.Services
 
             using (var sr = new StreamReader(path))
             {
-                while (sr.EndOfStream)
+                while (!sr.EndOfStream)
                 {
                     string[] rawData = sr.ReadLine().Split(';').ToArray();
                     T newObj = (T)factory.Invoke(rawData);

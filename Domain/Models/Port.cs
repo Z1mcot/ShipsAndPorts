@@ -18,7 +18,7 @@ namespace ShipsAndPorts.Domain.Models
         public static Port FromTxtFile(string[] data)
         {
             int[] coords = data.Skip(1).Select(x => int.Parse(x)).ToArray();
-            return new Port(data[0], new Point(coords[1], coords[2]));
+            return new Port(data[0], new Point(coords[0], coords[1]));
         }
 
         public Port(string name, Point coordinates)

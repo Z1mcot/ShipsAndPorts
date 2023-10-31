@@ -35,11 +35,13 @@ namespace ShipsAndPorts.Views
                 listView_Ships.Items.Add(ship.Name);
         }
 
-        // TODO дописать обновление формы после обновления модели
         private void UpdateForm(ShipNavigatorModel model)
         {
             if (model.SelectedShip == -1)
+            {
                 UpdateDeselect();
+                return;
+            }
 
             UpdateSelectedShip(model.SelectedShip);
 

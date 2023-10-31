@@ -32,6 +32,7 @@ namespace ShipsAndPorts.Models
 
         public double Speed => _speed;
 
+        // Ленивая инициализация, мы получаем порт: после создания объекта корабля
         public Lazy<Port> CurrentPort { get => _currentPort; set => _currentPort = value; }
 
         public string PortId => _portId;

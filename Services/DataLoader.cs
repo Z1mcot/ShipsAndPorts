@@ -45,9 +45,24 @@ namespace ShipsAndPorts.Services
 
         public static void Mock()
         {
-            List<Ship> ships = new List<Ship>() {
-                new Ship("Первый", ShipTypeEnum.Passenger, "Порт 1", 100, 25)
-            };
+            List<Ship> ships = new List<Ship>();
+            List<Port> ports = new List<Port>();
+            using (var sw = new StreamWriter(Paths.ShipsFile))
+            {
+                foreach (var item in ships)
+                {
+                    sw.WriteLine(item);
+                }
+
+            }
+            using (var sp = new StreamWriter(Paths.PortsFile))
+            {
+                foreach (var item in ports)
+                {
+                    sp.WriteLine(item);
+                }
+            }
+  
         }
     }
 }

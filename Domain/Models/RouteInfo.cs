@@ -27,5 +27,10 @@ namespace ShipsAndPorts.Domain.Models
         public double Distance => _distance ?? 0;
 
         public bool IsValid { get => _isValid; }
+
+        public override string ToString()
+        {
+            return $"Время в пути: {_timeEnRoute}\nДистанция: {_distance}";
+        }
     }
 }

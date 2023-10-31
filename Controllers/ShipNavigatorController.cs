@@ -18,30 +18,31 @@ namespace ShipsAndPorts.Controllers
             _model = model;
         }
 
-        public void SubscribeToModelNotifications(Action<ShipNavigatorModel> formUpdateAction)
+        public void InitView() => _model.InitView();
+
+        public void SubscribeToModelNotifications(Action<ShipNavigatorModel> onFormCreate, Action<ShipNavigatorModel> onFormUpdate)
         {
-            _model.UpdateViewFunc = formUpdateAction;
+            _model.InitViewFunc = onFormCreate;
+            _model.UpdateViewFunc = onFormUpdate;
         }
 
-        public void SelectShip(string shipName)
+        public void SelectShip(int shipIndex)
         {
-            if (_model.SelectedShip.Name == shipName)
-                return;
-            
+            List<int> avaliablePorts = ShipNavigatorService.GetAvaliablePorts(_model.Ships[shipIndex], _model.Ports);
 
-            Ship newlySelectedShip = _model.Ships.SingleOrDefault(s => s.Name == shipName);
-            _model.CopyWith(selectedShip:  newlySelectedShip ?? Ship.Empty);
+            _model.CopyWith(selectedShip: shipIndex, avaliablePorts: avaliablePorts);
         }
 
-        public void SelectPort(string portName)
+        public void SelectPort(int portIndex)
         {
-            if (_model.SelectedPort.Name == portName || _model.SelectedShip == null || _model.SelectedShip == Ship.Empty)
-                return;
+            RouteInfo newRouteInfo = ShipNavigatorService.GetRouteInfo(_model.Ships[_model.SelectedShip], _model.Ports[portIndex]);
 
-            Port newlySelectedPort = _model.Ports.SingleOrDefault(s => s.Name == portName);
-            RouteInfo newRouteInfo = ShipNavigatorService.GetRouteInfo(_model.SelectedShip, newlySelectedPort);
+            _model.CopyWith(selectedPort: portIndex, routeInfo: newRouteInfo);
+        }
 
-            _model.CopyWith(selectedPort: newlySelectedPort, routeInfo: newRouteInfo);
+        public void Deselect()
+        {
+            _model.CopyWith(-1, -1, new List<int>(), RouteInfo.Empty);
         }
     }
 }

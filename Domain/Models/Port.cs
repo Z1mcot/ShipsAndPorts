@@ -15,16 +15,16 @@ namespace ShipsAndPorts.Domain.Models
         private readonly string _name;
         private readonly Point _coordinates;
 
+        public static Port FromTxtFile(string[] data)
+        {
+            int[] coords = data.Skip(1).Select(x => int.Parse(x)).ToArray();
+            return new Port(data[0], new Point(coords[0], coords[1]));
+        }
+
         public Port(string name, Point coordinates)
         {
             _name = name;
             _coordinates = coordinates;
-        }
-
-        public Port()
-        {
-            _name = "f";
-            _coordinates = Point.Empty;
         }
 
         public string Name => _name;

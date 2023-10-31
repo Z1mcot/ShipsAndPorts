@@ -32,9 +32,16 @@ namespace ShipsAndPorts.Models
 
         public double Speed => _speed;
 
+        // Ленивая инициализация, мы получаем порт: после создания объекта корабля
         public Lazy<Port> CurrentPort { get => _currentPort; set => _currentPort = value; }
 
         public string PortId => _portId;
+
+        public static Ship FromTxtFile(string[] data)
+        {
+            var type = (ShipTypeEnum)Enum.Parse(typeof(ShipTypeEnum), data[1]);
+            return new Ship(data[0], type, data[2], double.Parse(data[3]), double.Parse(data[4]));
+        }
 
         public Ship(string name, ShipTypeEnum type, string portId, double range, double speed)
         {
@@ -43,15 +50,6 @@ namespace ShipsAndPorts.Models
             _portId = portId;
             _range = range;
             _speed = speed;
-        }
-
-        public Ship()
-        {
-            _name = "f";
-            _type = ShipTypeEnum.Passenger;
-            _portId = "a";
-            _range = 100;
-            _speed = 10;
         }
     }
 }

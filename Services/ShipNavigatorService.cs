@@ -25,9 +25,15 @@ namespace ShipsAndPorts.Services
             return TimeSpan.FromHours(distance / ship.Speed);
         }
 
-        public static List<Port> GetAvaliablePorts(Ship selectedShip, List<Port> allPorts)
+        public static List<int> GetAvaliablePorts(Ship selectedShip, List<Port> allPorts)
         {
-            return allPorts.Where(p => CalculateDistanceToPort(selectedShip, p) <= selectedShip.Range).ToList();
+            var ports = new List<int>();
+            for (int i = 0; i < allPorts.Count; i++)
+            {
+                if (CalculateDistanceToPort(selectedShip, allPorts[i]) <= selectedShip.Range)
+                    ports.Add(i);
+            }
+            return ports;
         }
 
         public static RouteInfo GetRouteInfo(Ship ship, Port destination) 

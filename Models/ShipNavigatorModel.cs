@@ -9,6 +9,7 @@ namespace ShipsAndPorts.Models
 {
     public class ShipNavigatorModel
     {
+        private Action<ShipNavigatorModel> _initViewFunc;
         private Action<ShipNavigatorModel> _updateViewFunc;
         private readonly List<Ship> _ships;
         private readonly List<Port> _ports;
@@ -20,6 +21,8 @@ namespace ShipsAndPorts.Models
 
         private RouteInfo _routeInfo = null;
 
+        private bool _isViewInitialized = false;
+
         public Action<ShipNavigatorModel> UpdateViewFunc { get => _updateViewFunc; set => _updateViewFunc = value; }
         public int SelectedShip => _selectedShipIndex;
         public int SelectedPort => _selectedPortIndex;
@@ -30,6 +33,7 @@ namespace ShipsAndPorts.Models
 
         public List<Port> Ports => _ports;
 
+        public Action<ShipNavigatorModel> InitViewFunc { get => _initViewFunc; set => _initViewFunc = value; }
 
         public ShipNavigatorModel(List<Ship> ships, List<Port> ports)
         {
@@ -50,6 +54,14 @@ namespace ShipsAndPorts.Models
             _routeInfo = routeInfo ?? RouteInfo;
             
             NotifyListeners();
+        }
+
+        public void InitView()
+        {
+            if (_isViewInitialized) return;
+
+            _initViewFunc?.Invoke(this);
+            _isViewInitialized = true;
         }
 
         private void NotifyListeners() => _updateViewFunc?.Invoke(this); 

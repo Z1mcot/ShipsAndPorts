@@ -1,4 +1,5 @@
 ﻿using ShipsAndPorts.Domain.Constants;
+using ShipsAndPorts.Domain.Enums;
 using ShipsAndPorts.Domain.Models;
 using ShipsAndPorts.Models;
 using System;
@@ -33,13 +34,20 @@ namespace ShipsAndPorts.Services
             {
                 while (sr.EndOfStream)
                 {
-                    string[] rawData = sr.ReadLine().Split(' ').ToArray();
+                    string[] rawData = sr.ReadLine().Split(';').ToArray();
                     T newObj = (T)factory.Invoke(rawData);
                     result.Add(newObj);
                 }
             }
 
             return result;
+        }
+
+        public static void Mock()
+        {
+            List<Ship> ships = new List<Ship>() {
+                new Ship("Первый", ShipTypeEnum.Passenger, "Порт 1", 100, 25)
+            };
         }
     }
 }

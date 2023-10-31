@@ -18,9 +18,12 @@ namespace ShipsAndPorts.Controllers
             _model = model;
         }
 
-        public void SubscribeToModelNotifications(Action<ShipNavigatorModel> formUpdateAction)
+        public void InitView() => _model.InitView();
+
+        public void SubscribeToModelNotifications(Action<ShipNavigatorModel> onFormCreate, Action<ShipNavigatorModel> onFormUpdate)
         {
-            _model.UpdateViewFunc = formUpdateAction;
+            _model.InitViewFunc = onFormCreate;
+            _model.UpdateViewFunc = onFormUpdate;
         }
 
         public void SelectShip(int shipIndex)

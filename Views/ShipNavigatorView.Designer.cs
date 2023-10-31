@@ -90,6 +90,7 @@
             this.Controls.Add(this.listView_Ships);
             this.Name = "ShipNavigatorView";
             this.Text = "ShipNavigatorView";
+            this.Load += new System.EventHandler(this.ShipNavigatorView_Load);
             this.Click += new System.EventHandler(this.OnFormClick);
             this.ResumeLayout(false);
             this.PerformLayout();

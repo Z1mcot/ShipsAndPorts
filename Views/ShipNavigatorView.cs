@@ -23,7 +23,16 @@ namespace ShipsAndPorts.Views
             InitializeComponent();
 
             _controller = controller;
-            _controller.SubscribeToModelNotifications(UpdateForm);
+            _controller.SubscribeToModelNotifications(onFormCreate: InitForm, onFormUpdate: UpdateForm);
+        }
+
+        private void InitForm(ShipNavigatorModel model)
+        {
+            foreach (var port in model.Ports)
+                listView_Ports.Items.Add(port.Name);
+            
+            foreach (var ship in model.Ships)
+                listView_Ships.Items.Add(ship.Name);
         }
 
         // TODO дописать обновление формы после обновления модели
@@ -94,5 +103,9 @@ namespace ShipsAndPorts.Views
         private void OnFormClick(object sender, EventArgs e)
             => _controller.Deselect();
 
+        private void ShipNavigatorView_Load(object sender, EventArgs e)
+        {
+            _controller.InitView();
+        }
     }
 }

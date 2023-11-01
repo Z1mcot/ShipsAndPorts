@@ -40,10 +40,10 @@
             this.listView_Ships.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Корабли});
             this.listView_Ships.HideSelection = false;
-            this.listView_Ships.Location = new System.Drawing.Point(83, 65);
-            this.listView_Ships.MultiSelect = false;
+            this.listView_Ships.Location = new System.Drawing.Point(111, 80);
+            this.listView_Ships.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listView_Ships.Name = "listView_Ships";
-            this.listView_Ships.Size = new System.Drawing.Size(121, 301);
+            this.listView_Ships.Size = new System.Drawing.Size(160, 370);
             this.listView_Ships.TabIndex = 0;
             this.listView_Ships.UseCompatibleStateImageBehavior = false;
             this.listView_Ships.View = System.Windows.Forms.View.List;
@@ -58,10 +58,10 @@
             this.listView_Ports.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Ports});
             this.listView_Ports.HideSelection = false;
-            this.listView_Ports.Location = new System.Drawing.Point(328, 65);
-            this.listView_Ports.MultiSelect = false;
+            this.listView_Ports.Location = new System.Drawing.Point(437, 80);
+            this.listView_Ports.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listView_Ports.Name = "listView_Ports";
-            this.listView_Ports.Size = new System.Drawing.Size(121, 301);
+            this.listView_Ports.Size = new System.Drawing.Size(160, 370);
             this.listView_Ports.TabIndex = 1;
             this.listView_Ports.UseCompatibleStateImageBehavior = false;
             this.listView_Ports.View = System.Windows.Forms.View.List;
@@ -73,21 +73,23 @@
             // 
             // textBox_RouteInfo
             // 
-            this.textBox_RouteInfo.Location = new System.Drawing.Point(544, 64);
+            this.textBox_RouteInfo.Location = new System.Drawing.Point(725, 79);
+            this.textBox_RouteInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_RouteInfo.Multiline = true;
             this.textBox_RouteInfo.Name = "textBox_RouteInfo";
             this.textBox_RouteInfo.ReadOnly = true;
-            this.textBox_RouteInfo.Size = new System.Drawing.Size(212, 301);
+            this.textBox_RouteInfo.Size = new System.Drawing.Size(281, 370);
             this.textBox_RouteInfo.TabIndex = 2;
             // 
             // ShipNavigatorView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.textBox_RouteInfo);
             this.Controls.Add(this.listView_Ports);
             this.Controls.Add(this.listView_Ships);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ShipNavigatorView";
             this.Text = "ShipNavigatorView";
             this.Load += new System.EventHandler(this.ShipNavigatorView_Load);

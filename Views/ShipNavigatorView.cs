@@ -97,10 +97,21 @@ namespace ShipsAndPorts.Views
         }
 
         private void OnShipClick(object sender, EventArgs e)
-            => _controller.SelectShip(listView_Ships.SelectedIndices[0]);
+        { 
+            if (listView_Ships.SelectedIndices.Count != 0)
+            {
+                _controller.SelectShip(listView_Ships.SelectedIndices[0]);
+            }
+         
+        }
 
         private void OnPortClick(object sender, EventArgs e)
-            => _controller.SelectPort(listView_Ports.SelectedIndices[0]);
+        {
+            if (listView_Ports.SelectedIndices.Count != 0)
+            {
+                _controller.SelectPort(listView_Ports.SelectedIndices[0]);
+            }
+        }
 
         private void OnFormClick(object sender, EventArgs e)
             => _controller.Deselect();
